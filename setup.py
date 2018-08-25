@@ -8,13 +8,15 @@ if not packages:
     raise ValueError('No packages detected.')
 
 
-with open('./README.rst', 'r') as readme_file:
+with open('./README.md', 'r') as readme_file:
     readme = readme_file.read()
 
 setup(
     name='octicons',
     version='0.1',
     description='A Python port of GitHub\'s Octicons, with Django support',
+    long_description=readme,
+    long_description_content_type='text/markdown',
     url='https://github.com/leesdolphin/octicons',
     author='Opal Symes',
     author_email='python@opal.codes',

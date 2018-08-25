@@ -1,4 +1,4 @@
-A Python port of [Octicons](https://octicons.github.com/) for [Django](https://www.djangoproject.com/).
+A Python port of GitHub's [Octicons](https://octicons.github.com/) for [Django](https://www.djangoproject.com/).
 
 Octicons version: [v8.0.0](https://github.com/primer/octicons/releases/tag/v8.0.0)
 
