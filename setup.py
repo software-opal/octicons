@@ -17,11 +17,13 @@ setup(
     description='A Python port of GitHub\'s Octicons, with Django support',
     long_description=readme,
     long_description_content_type='text/markdown',
+    python_requires='>=3.4',
     url='https://github.com/leesdolphin/octicons',
     author='Opal Symes',
     author_email='python@opal.codes',
     license='LGPLv3+',
     packages=packages,
+    include_package_data=True,
     install_requires=[],
     zip_safe=False,
     classifiers=[
