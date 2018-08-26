@@ -50,13 +50,16 @@ class Octicon():
         if key_exists('class'):
             if isinstance(opts['class'], str):
                 # A string.
-                overrides["class"] = list(
-                    *defaults['class'], *opts['class'].split())
+                overrides["class"] = [
+                    *defaults['class'],
+                    *opts['class'].split()
+                ]
             else:
                 # An iterable of some sort.
-                overrides["class"] = list(
-                    *defaults['class'], *opts['class'])
-
+                overrides["class"] = [
+                    *defaults['class'],
+                    *opts['class']
+                ]
         if key_exists('aria-label'):
             overrides["aria-label"] = opts["aria-label"]
             overrides["role"] = "img"
