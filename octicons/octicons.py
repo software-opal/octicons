@@ -52,13 +52,13 @@ class Octicon():
                 # A string.
                 overrides["class"] = [
                     *defaults['class'],
-                    *opts['class'].split()
+                    *opts['class'].split(),
                 ]
             else:
                 # An iterable of some sort.
                 overrides["class"] = [
                     *defaults['class'],
-                    *opts['class']
+                    *opts['class'],
                 ]
         if key_exists('aria-label'):
             overrides["aria-label"] = opts["aria-label"]
