@@ -91,3 +91,11 @@ Obviously the name and the naming scheme implies tight integration with Octicons
   ...
 }
 ```
+
+## Versioning
+
+This project follows Semantic versioning, ish. Due to the need to track 2 separate versions, the API and the Octicons themselves, versioning will be as follows: `MAJOR.OCTICONS_MINOR.OCTICONS_PATCH.PATCH`
+
+Breaking changes such as changing either the Django or Python API will increment the `MAJOR` version. As will upgrading Octicons to a new major version(e.g. Octicons 9.x.x). The `MINOR.PATCH` will use the Octicons minor and patch as that is the most useful information. The final field will be added when bug-fixes or patches are made that don't change the Octicons version.
+
+If you have a better solution feel free to open an issue/PR. Chances are it'll be better than this franken-versioning scheme I came up with.
