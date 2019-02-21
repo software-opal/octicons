@@ -37,9 +37,10 @@ class Octicon():
         return mark_safe("<svg %s>%s</svg>" % (attrs, self.path))
 
     def build_attributes(self, opts):
-        key_exists = functools.partial(self.key_exists, opts)
-        defaults = self.default_attrs
         opts = {k.replace('_', '-'): v for k, v in opts.items()}
+        key_exists = functools.partial(self.key_exists, opts)
+
+        defaults = self.default_attrs
         overrides = {}
         if key_exists('width') and not key_exists('height'):
             # Generate the correct height from the aspect ratio
@@ -47,19 +48,22 @@ class Octicon():
         elif key_exists('height') and not key_exists('width'):
             # Generate the correct width from the aspect ratio
             overrides['width'] = opts["height"] * self.size_ratio
-        if key_exists('class'):
-            if isinstance(opts['class'], str):
-                # A string.
-                overrides["class"] = [
-                    *defaults['class'],
-                    *opts['class'].split(),
-                ]
-            else:
-                # An iterable of some sort.
-                overrides["class"] = [
-                    *defaults['class'],
-                    *opts['class'],
-                ]
+        for class_key in ['class', 'classes']:
+            if key_exists(class_key):
+                if isinstance(opts[class_key], str):
+                    # A string.
+                    overrides["class"] = [
+                        *defaults['class'],
+                        *opts[class_key].split(),
+                    ]
+                else:
+                    # An iterable of some sort.
+                    overrides["class"] = [
+                        *defaults['class'],
+                        *opts[class_key],
+                    ]
+                # Remove it so that `classes` doesn't get output into the html
+                del opts[class_key]
         if key_exists('aria-label'):
             overrides["aria-label"] = opts["aria-label"]
             overrides["role"] = "img"
@@ -100,7 +104,8 @@ class OcticonStore():
             file = pathlib.Path(__file__).parent / 'data.json'
         else:
             file = pathlib.Path(file)
-        return cls(json.load(file.open()))
+        with file.open() as f:
+            return cls(json.load(f))
 
     def __init__(self, data_dict, *, Octicon=Octicon):
         raw_icons = [
