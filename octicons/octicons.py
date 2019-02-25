@@ -109,13 +109,19 @@ class Octicon():
 class OcticonStore():
 
     @classmethod
-    def from_file(cls, file=None):
+    def from_file(cls, file=None, additional_file=None):
         if file is None:
             file = pathlib.Path(__file__).parent / 'data.json'
         else:
             file = pathlib.Path(file)
+        if additional_file:
+            additional_file = pathlib.Path(additional_file)
+            with file.open() as f, additional_file.open() as g:
+                data = json.load(f)
+                data.update(json.load(g))
+                return cls(data)
         with file.open() as f:
-            return cls(json.load(f))
+                return cls(json.load(f))
 
     def __init__(self, data_dict, *, Octicon=Octicon):
         raw_icons = [
