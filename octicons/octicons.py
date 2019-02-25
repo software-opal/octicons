@@ -14,6 +14,7 @@ class Octicon():
         self.name = data['name']
         self.keywords = data['keywords']
         self.path = data['path']
+        self.viewBox = data.get('viewBox', None)
 
     @staticmethod
     def key_exists(opts, key):
@@ -86,6 +87,15 @@ class Octicon():
 
     @property
     def default_attrs(self):
+        if self.viewBox:
+            return {
+                "version": "1.1",
+                "width": self.width,
+                "height": self.height,
+                "viewBox": "%s" % (self.viewBox),
+                "class": ["octicon", "octicon-" + self.name],
+                "aria-hidden": "true"
+            }
         return {
             "version": "1.1",
             "width": self.width,
