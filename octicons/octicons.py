@@ -14,6 +14,7 @@ class Octicon():
         self.name = data['name']
         self.keywords = data['keywords']
         self.path = data['path']
+        self.viewBox = data.get('viewBox', None)
 
     @staticmethod
     def key_exists(opts, key):
@@ -86,6 +87,15 @@ class Octicon():
 
     @property
     def default_attrs(self):
+        if self.viewBox:
+            return {
+                "version": "1.1",
+                "width": self.width,
+                "height": self.height,
+                "viewBox": "%s" % (self.viewBox),
+                "class": ["octicon", "octicon-" + self.name],
+                "aria-hidden": "true"
+            }
         return {
             "version": "1.1",
             "width": self.width,
@@ -99,13 +109,19 @@ class Octicon():
 class OcticonStore():
 
     @classmethod
-    def from_file(cls, file=None):
+    def from_file(cls, file=None, additional_file=None):
         if file is None:
             file = pathlib.Path(__file__).parent / 'data.json'
         else:
             file = pathlib.Path(file)
+        if additional_file:
+            additional_file = pathlib.Path(additional_file)
+            with file.open() as f, additional_file.open() as g:
+                data = json.load(f)
+                data.update(json.load(g))
+                return cls(data)
         with file.open() as f:
-            return cls(json.load(f))
+                return cls(json.load(f))
 
     def __init__(self, data_dict, *, Octicon=Octicon):
         raw_icons = [
