@@ -2,7 +2,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-VERSION="$(npm view "octicons@latest" version)"
+PACKAGE="@primer/octicons"
+
+VERSION="$(npm view "${PACKAGE}@latest" version)"
 
 if grep -q --fixed "Octicons version: [v${VERSION}]" README.md; then
   echo "No updates needed"
@@ -12,8 +14,8 @@ fi
 echo "Updating octicons to version ${VERSION}"
 
 rm -rf node_modules
-npm link --quiet "octicons@${VERSION}"
-cp node_modules/octicons/build/data.json octicons/data.json
+npm install --no-package-lock --quiet "${PACKAGE}@${VERSION}"
+cp "node_modules/${PACKAGE}/build/data.json" octicons/data.json
 rm -rf node_modules
 
 OCTICONS_README_LINE="Octicons version: [v${VERSION}](https://github.com/primer/octicons/releases/tag/v${VERSION})"

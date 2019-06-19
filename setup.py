@@ -13,7 +13,7 @@ with open('./README.md', 'r') as readme_file:
 
 setup(
     name='octicons',
-    version='1.4.2',
+    version='2.1.0',
     description='A Python port of GitHub\'s Octicons, with Django support',
     long_description=readme,
     long_description_content_type='text/markdown',
