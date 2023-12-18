@@ -1,6 +1,6 @@
 # A Python port of GitHub's [Octicons](https://octicons.github.com/) for [Django](https://www.djangoproject.com/).
 
-Octicons version: [v9.1.0](https://github.com/primer/octicons/releases/tag/v9.1.0)
+Octicons version: [v19.8.0](https://github.com/primer/octicons/releases/tag/v19.8.0)
 
 Install this package from [PyPI](https://pypi.org/project/octicons/) using `pip` or your favorite Python package manager:
 
